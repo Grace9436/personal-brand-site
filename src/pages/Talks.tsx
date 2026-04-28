@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Video, FileText } from "lucide-react";
+import { Video, FileText } from "lucide-react";
 import { talksData, seoData } from "../data/siteData";
 import SEO from "../components/SEO";
 
