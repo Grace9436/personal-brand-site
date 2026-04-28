@@ -38,7 +38,7 @@ export default class ErrorBoundary extends Component<Props, State> {
             <p className="text-gray-500 mb-2">
               An unexpected error occurred. Please try refreshing the page.
             </p>
-            <p className="text-xs text-gray-400 mb-8 font-mono bg-gray-50 rounded p-2 truncate">
+            <p className="text-xs text-gray-500 mb-8 font-mono bg-gray-50 rounded p-2 truncate">
               {this.state.error?.message}
             </p>
             <div className="flex gap-3 justify-center">

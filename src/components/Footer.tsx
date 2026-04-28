@@ -72,10 +72,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-500">
             &copy; {year} {siteData.name}. All rights reserved.
           </p>
-          <p className="text-xs text-gray-400 flex items-center gap-1">
+          <p className="text-xs text-gray-500 flex items-center gap-1">
             Made with <Heart size={10} className="text-red-400" /> for working
             mothers everywhere.
           </p>

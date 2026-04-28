@@ -49,7 +49,7 @@ export default function Media() {
                     className="w-full h-full"
                   />
                 </div>
-                <span className="text-sm font-bold text-gray-400 uppercase tracking-wider">
+                <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">
                   {item.outlet}
                 </span>
               </div>

@@ -76,7 +76,7 @@ export default function Podcast() {
           >
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <div className="flex items-center gap-3 text-xs text-gray-400 mb-2">
+                <div className="flex items-center gap-3 text-xs text-gray-500 mb-2">
                   <span>{ep.date}</span>
                   <span className="w-1 h-1 rounded-full bg-gray-300" />
                   <span>{ep.duration}</span>

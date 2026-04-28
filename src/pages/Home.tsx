@@ -18,17 +18,17 @@ export default function Home() {
           <div className="flex items-center gap-16 lg:gap-20">
             <div className="flex-1 max-w-3xl">
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
               className="text-sm font-semibold text-brand-600 tracking-widest uppercase mb-4"
             >
               {heroData.greeting}
             </motion.p>
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.05 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 tracking-tight leading-[1.1] mb-6"
             >
               {heroData.name}
@@ -37,17 +37,17 @@ export default function Home() {
               </span>
             </motion.h1>
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
               className="text-lg text-gray-600 leading-relaxed max-w-xl mb-8"
             >
               {heroData.description}
             </motion.p>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.15 }}
               className="flex flex-wrap gap-4"
             >
               <a
@@ -143,7 +143,7 @@ export default function Home() {
                 <p className="text-sm text-brand-600 font-medium mt-2">
                   {homeExtras.featuredTalk.event}
                 </p>
-                <p className="text-sm text-gray-400 mt-1 flex items-center gap-2">
+                <p className="text-sm text-gray-500 mt-1 flex items-center gap-2">
                   <Calendar size="14" />
                   {homeExtras.featuredTalk.date} · {homeExtras.featuredTalk.location}
                 </p>
@@ -191,7 +191,7 @@ export default function Home() {
           >
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <div className="flex items-center gap-3 text-xs text-gray-400 mb-2">
+                <div className="flex items-center gap-3 text-xs text-gray-500 mb-2">
                   <span>{homeExtras.featuredEpisode.date}</span>
                   <span className="w-1 h-1 rounded-full bg-gray-300" />
                   <span>{homeExtras.featuredEpisode.duration}</span>

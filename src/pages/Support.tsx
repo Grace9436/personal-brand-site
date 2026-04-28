@@ -80,19 +80,19 @@ export default function Support() {
             </p>
             <div className="flex flex-wrap gap-6 text-sm mb-6">
               <div>
-                <span className="text-gray-400">Amount:</span>{" "}
+                <span className="text-gray-500">Amount:</span>{" "}
                 <span className="font-semibold text-gray-900">
                   {supportData.grantInfo.amount}
                 </span>
               </div>
               <div>
-                <span className="text-gray-400">Recipients:</span>{" "}
+                <span className="text-gray-500">Recipients:</span>{" "}
                 <span className="font-semibold text-gray-900">
                   {supportData.grantInfo.recipients}
                 </span>
               </div>
               <div>
-                <span className="text-gray-400">Deadline:</span>{" "}
+                <span className="text-gray-500">Deadline:</span>{" "}
                 <span className="font-semibold text-gray-900">
                   {supportData.grantInfo.deadline}
                 </span>
