@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Languages, Sun, Moon, Palette } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { navLinks } from "../data/siteData";
+import { useContent, useLanguage } from "../contexts/LanguageContext";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function Navbar() {
+  const { navLinks } = useContent();
+  const { language, setLanguage } = useLanguage();
+  const { theme, setTheme } = useTheme();
+  const themes = ["warm", "cream", "dark"] as const;
+  const nextTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
+  const ThemeIcon = theme === "warm" ? Sun : theme === "cream" ? Palette : Moon;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -54,6 +61,21 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            <div className="w-px h-5 bg-gray-200 mx-2" />
+            <button
+              onClick={() => setLanguage(language === "en" ? "zh" : "en")}
+              className="px-3 py-2 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+              aria-label={language === "en" ? "Switch to Chinese" : "切换到英文"}
+            >
+              {language === "en" ? "中文" : "EN"}
+            </button>
+            <button
+              onClick={() => setTheme(nextTheme)}
+              className="px-3 py-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+              aria-label={`Switch to ${nextTheme} theme`}
+            >
+              <ThemeIcon size={16} />
+            </button>
           </div>
 
           <button
@@ -95,6 +117,22 @@ export default function Navbar() {
                   </Link>
                 );
               })}
+              <div className="border-t border-gray-100 pt-3 mt-3 space-y-1">
+                <button
+                  onClick={() => setTheme(nextTheme)}
+                  className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+                >
+                  <ThemeIcon size={16} />
+                  {theme === "warm" ? "Warm" : theme === "cream" ? "Cream" : "Dark"}
+                </button>
+                <button
+                  onClick={() => setLanguage(language === "en" ? "zh" : "en")}
+                  className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+                >
+                  <Languages size="16" />
+                  {language === "en" ? "中文" : "English"}
+                </button>
+              </div>
             </div>
           </motion.div>
         )}

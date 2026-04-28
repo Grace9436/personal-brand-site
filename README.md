@@ -37,6 +37,8 @@ Performance scores fluctuate with network and device conditions. The table below
 - **CLS optimization** — Cumulative Layout Shift reduced from 0.422 to ~0 by identifying scrollbar-induced shifts and fixing navbar dimensions
 - **Accessibility score 93–100** — Skip-to-content link, `aria-current="page"` navigation, WCAG AA color contrast throughout
 - **Security headers** — CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy, COOP configured via Vercel
+- **Multi-language support** — Full English/Chinese toggle with per-page translations; type-safe via inferred `Content` type from locale modules
+- **Theme switching** — Three themes (Warm/Cream/Dark) with CSS variable overrides; zero layout shift on switch, persists via `localStorage`
 - **No form backend, no analytics, no third-party scripts** — Privacy-first by default
 
 ## Project Structure
@@ -45,12 +47,18 @@ Performance scores fluctuate with network and device conditions. The table below
 src/
 ├── main.tsx                # Entry point (StrictMode + React 19)
 ├── App.tsx                 # Lazy-loaded routes + Suspense
-├── index.css               # Tailwind + custom brand theme tokens
+├── index.css               # Tailwind + brand theme + dark/cream overrides
+├── contexts/
+│   ├── LanguageContext.tsx  # Multi-language provider (en/zh)
+│   └── ThemeContext.tsx     # Theme provider (warm/cream/dark)
 ├── data/
-│   └── siteData.ts         # Single source of truth for all content
+│   ├── siteData.ts         # English content source of truth
+│   └── locales/
+│       ├── en.ts           # English re-exports from siteData
+│       └── zh.ts           # Chinese translations
 ├── components/
 │   ├── Layout.tsx           # Skip link + Navbar + ErrorBoundary + Footer
-│   ├── Navbar.tsx           # Fixed nav, scroll detection, mobile menu
+│   ├── Navbar.tsx           # Fixed nav, scroll detection, mobile menu, lang/theme toggles
 │   ├── Footer.tsx           # Social links, contact, copyright
 │   ├── SEO.tsx              # Per-page meta tags via DOM API
 │   ├── Img.tsx              # Placeholder-gradient images with lazy loading
@@ -74,6 +82,8 @@ src/
 - **Placeholder-first images**: The `Img` component renders CSS gradient placeholders with fixed `aspect-ratio` until real images are provided, preventing layout shift.
 - **Custom brand theme**: Tailwind v4 `@theme` directive defines a warm brown palette (`brand-50` through `brand-950`) consistent across all components.
 - **Component-based routing**: React Router v7 with a shared `<Layout />` shell (Navbar + ErrorBoundary + Footer) wrapping page routes.
+- **Multi-language**: English and Chinese translations stored as TypeScript modules with identical export structure. A `LanguageContext` provides `useContent()` to all pages — switching language swaps the entire module, updating every page's text and SEO metadata simultaneously.
+- **CSS variable theming**: Three themes (Warm/Cream/Dark) implemented via `[data-theme]` CSS custom property overrides. Theme switching requires zero component changes — Tailwind utilities resolve to different color values automatically. Anti-FOUC inline script reads `localStorage` before React hydrates. No runtime CSS injection, no layout shift on switch.
 
 ## Optimization Highlights
 
@@ -124,6 +134,7 @@ Deployed via **Vercel** with automatic SPA fallback and custom security headers:
 | 3D | Performance | CLS fix, Speed Index optimization, accessibility tuning |
 | 3E | Security | CSP + security headers, Lighthouse documentation |
 | 4 | Close-out | README, retrospective, portfolio docs, final checklist |
+| 5 | Multi-language & Theme | Chinese translations, en/zh toggle, 3 themes (warm/cream/dark) |
 
 ## Future Directions
 
@@ -133,3 +144,5 @@ Deployed via **Vercel** with automatic SPA fallback and custom security headers:
 - PWA support (service worker + manifest)
 - Blog section for long-form content
 - Performance budget in CI
+- Additional language translations (Japanese, Spanish)
+- Theme color picker or system preference detection

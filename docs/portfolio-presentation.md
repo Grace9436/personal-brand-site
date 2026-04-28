@@ -24,6 +24,8 @@ A personal brand website built through the full software delivery lifecycle — 
 - **Security headers:** CSP, XFO, COOP, and Permissions-Policy configured via Vercel deployment
 - **Error boundary:** Class-based React error boundary with fallback UI and refresh/home navigation
 - **Single data source:** All content driven from one TypeScript file — adding content requires no JSX changes
+- **Multi-language (en/zh):** Type-safe Chinese translations with full-page coverage — language toggle swaps all text and SEO metadata simultaneously
+- **Three themes (warm/cream/dark):** CSS variable overrides with zero runtime CSS injection, zero layout shift, and anti-FOUC localStorage persistence
 
 **Deployed at:** [personal-brand-site-eight.vercel.app](https://personal-brand-site-eight.vercel.app)
 
@@ -34,6 +36,8 @@ A personal brand website built through the full software delivery lifecycle — 
 - "I chose React 19 with Vite 8 for the build tool — Vite's ES module-based dev server scales well and Tailwind v4's `@theme` directive made the brand theme consistent across 30+ components."
 - "All content lives in a single `siteData.ts` file. Pages just render props — no hardcoded text, no CMS integration needed for a site this size."
 - "Route-level code splitting with `React.lazy()` keeps the initial bundle under 120 KB gzipped. Each additional page loads as a separate 2–3 KB chunk on navigation."
+- "Multi-language support uses TypeScript module swapping — Chinese translations mirror the English export structure exactly, so `LanguageContext` can switch the entire content module with zero per-page changes."
+- "The three themes (warm/cream/dark) are pure CSS custom property overrides triggered by `data-theme` on `<html>`. No runtime CSS injection, no component changes — every Tailwind utility resolves to the right color automatically."
 
 ### Performance
 
@@ -68,4 +72,4 @@ A personal brand website built through the full software delivery lifecycle — 
 
 ## Tags
 
-`React` `TypeScript` `Vite` `Tailwind CSS` `Framer Motion` `React Router` `Lighthouse` `CLS` `Web Vitals` `Accessibility` `CSP` `Vercel`
+`React` `TypeScript` `Vite` `Tailwind CSS` `Framer Motion` `React Router` `Lighthouse` `CLS` `Web Vitals` `Accessibility` `CSP` `Vercel` `i18n` `Multi-language` `Theme Switching` `CSS Variables`

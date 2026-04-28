@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 
@@ -22,6 +24,8 @@ function PageLoader() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ThemeProvider>
+      <LanguageProvider>
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route element={<Layout />}>
@@ -36,6 +40,8 @@ export default function App() {
           </Route>
         </Routes>
       </Suspense>
+      </LanguageProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

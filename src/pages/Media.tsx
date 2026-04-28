@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Quote } from "lucide-react";
-import { mediaData, seoData } from "../data/siteData";
+import { useContent } from "../contexts/LanguageContext";
 import SEO from "../components/SEO";
 import Img from "../components/Img";
 
 export default function Media() {
+  const { mediaData, seoData } = useContent();
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <SEO

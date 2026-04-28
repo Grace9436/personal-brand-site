@@ -1,10 +1,11 @@
 import { ArrowRight, Play, Mic, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
-import { heroData, siteData, seoData, homeExtras } from "../data/siteData";
+import { useContent } from "../contexts/LanguageContext";
 import SEO from "../components/SEO";
 import Img from "../components/Img";
 
 export default function Home() {
+  const { heroData, siteData, seoData, homeExtras } = useContent();
   return (
     <>
       <SEO

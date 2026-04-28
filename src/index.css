@@ -17,6 +17,63 @@
   --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
+/* ============ Theme: Warm (default) ============ */
+/* Brand colors are defined in @theme above. Gray/white use Tailwind defaults. */
+
+/* ============ Theme: Cream ============ */
+[data-theme="cream"] {
+  --color-white: #fefdfb;
+
+  --color-gray-50: #fdf8f0;
+  --color-gray-100: #f9eedd;
+  --color-gray-200: #f0ddc5;
+  --color-gray-300: #e0c5a5;
+  --color-gray-400: #c9a880;
+  --color-gray-500: #a87c54;
+  --color-gray-600: #8a6545;
+  --color-gray-700: #6d5038;
+  --color-gray-900: #4f3a28;
+
+  --color-brand-50: #fefdfb;
+  --color-brand-100: #fdf6ed;
+  --color-brand-200: #f9e8d5;
+  --color-brand-300: #f0d5b8;
+  --color-brand-400: #e0b892;
+  --color-brand-500: #c99a6d;
+  --color-brand-600: #a87c54;
+  --color-brand-700: #8a6545;
+  --color-brand-800: #6d5038;
+  --color-brand-900: #4f3a28;
+  --color-brand-950: #332518;
+}
+
+/* ============ Theme: Dark ============ */
+[data-theme="dark"] {
+  --color-white: #1a1510;
+
+  --color-gray-50: #221b15;
+  --color-gray-100: #2a211a;
+  --color-gray-200: #3d3025;
+  --color-gray-300: #4a3a2e;
+  --color-gray-400: #5c4837;
+  --color-gray-500: #8b6f52;
+  --color-gray-600: #bc9e80;
+  --color-gray-700: #d4c0aa;
+  --color-gray-900: #f7f3ee;
+
+  --color-brand-50: #2a211a;
+  --color-brand-100: #3d3025;
+  --color-brand-200: #4a3a2e;
+  --color-brand-300: #5c4837;
+  --color-brand-400: #725943;
+  --color-brand-500: #8b6f52;
+  --color-brand-600: #a88564;
+  --color-brand-700: #bc9e80;
+  --color-brand-800: #d4c0aa;
+  --color-brand-900: #e8ddd0;
+  --color-brand-950: #f7f3ee;
+}
+
 html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
@@ -31,17 +88,17 @@ body {
 
 /* Skip-to-content link */
 .skip-link {
-  position: fixed;
-  top: -100%;
-  left: 0;
   z-index: 10000;
+  color: #fff;
+  background: var(--color-brand-600);
   padding: 8px 16px;
-  background: #6e5841;
-  color: white;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   transition: top 0.15s ease;
+  position: fixed;
+  top: -100%;
+  left: 0;
 }
 .skip-link:focus {
   top: 0;
@@ -50,7 +107,7 @@ body {
 
 /* Focus visible styles for keyboard users */
 :focus-visible {
-  outline: 2px solid #6e5841;
+  outline: 2px solid var(--color-brand-600);
   outline-offset: 2px;
   border-radius: 4px;
 }

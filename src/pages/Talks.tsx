@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Video, FileText } from "lucide-react";
-import { talksData, seoData } from "../data/siteData";
+import { useContent } from "../contexts/LanguageContext";
 import SEO from "../components/SEO";
 
-const allTags = Array.from(new Set(talksData.flatMap((t) => t.tags)));
-
 export default function Talks() {
+  const { talksData, seoData } = useContent();
+  const allTags = Array.from(new Set(talksData.flatMap((t) => t.tags)));
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
   const filtered = activeTag

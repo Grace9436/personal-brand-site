@@ -1,7 +1,8 @@
 import { Mail, Heart } from "lucide-react";
-import { siteData } from "../data/siteData";
+import { useContent } from "../contexts/LanguageContext";
 
 export default function Footer() {
+  const { siteData } = useContent();
   const year = new Date().getFullYear();
 
   return (
