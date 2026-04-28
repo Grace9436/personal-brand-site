@@ -32,7 +32,7 @@ export default function Talks() {
           Speaking engagements
         </h1>
         <p className="text-lg text-gray-600">
-          From keynote stages to workshop rooms — here's where I've been
+          From keynote stages to workshop rooms 鈥?here's where I've been
           speaking about supporting working mothers.
         </p>
       </motion.div>
@@ -88,7 +88,7 @@ export default function Talks() {
                   {talk.event}
                 </p>
                 <p className="text-sm text-gray-400 mt-1">
-                  {talk.date} · {talk.location}
+                  {talk.date} 路 {talk.location}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {talk.tags.map((tag) => (
