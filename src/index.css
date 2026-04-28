@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #f7f3ee;
+  --color-brand-100: #e8ddd0;
+  --color-brand-200: #d4c0aa;
+  --color-brand-300: #bc9e80;
+  --color-brand-400: #a88564;
+  --color-brand-500: #8b6f52;
+  --color-brand-600: #6e5841;
+  --color-brand-700: #544334;
+  --color-brand-800: #3d3025;
+  --color-brand-900: #2a211a;
+  --color-brand-950: #1a1510;
+
+  --font-heading: 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+/* Skip-to-content link */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: #6e5841;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: none;
+}
+
+/* Focus visible styles for keyboard users */
+:focus-visible {
+  outline: 2px solid #6e5841;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Safe area padding for mobile notches/home indicator */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 767px) {
+  button, a, input, select, textarea {
+    font-size: 16px;
+  }
+}
