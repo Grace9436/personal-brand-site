@@ -1,50 +1,89 @@
 # Personal Brand Website
 
-A clean, modern, responsive personal brand website built for a speaker, podcaster, and advocate. Built with React + TypeScript + Vite.
+A production-grade personal brand website for Alex Chen — speaker, podcaster, and advocate for working mothers. Built as a hands-on practice project covering the full lifecycle from MVP to deployment and performance optimization.
+
+**Live site:** [personal-brand-site-eight.vercel.app](https://personal-brand-site-eight.vercel.app)
+
+## Lighthouse Results
+
+Performance scores fluctuate with network and device conditions. The table below records the progression across optimization phases.
+
+| Metric | Before Optimization | Performance Tuning | Final (with Security Headers) |
+|--------|-------------------|-------------------|-------------------------------|
+| Performance | 73 | 94 | 88 |
+| Accessibility | 93 | 100 | 93 |
+| Best Practices | 77 | 77 | 100 |
+| SEO | 100 | 100 | 100 |
+
+**Key outcomes:** Best Practices 100, SEO 100, Performance 85+.
 
 ## Tech Stack
 
 | Category | Choice |
 |----------|--------|
 | Framework | React 19 |
-| Language | TypeScript |
-| Build Tool | Vite |
-| Styling | Tailwind CSS v4 |
+| Language | TypeScript 6 (strict mode) |
+| Build Tool | Vite 8 |
+| Styling | Tailwind CSS v4 (`@tailwindcss/vite` plugin) |
 | Animation | Framer Motion |
 | Routing | React Router v7 |
 | Icons | Lucide React |
+| Deployment | Vercel (SPA fallback + custom security headers) |
+
+## Key Achievements
+
+- **Route-level code splitting** — 7 pages split into separate chunks via `React.lazy()`, reducing initial bundle to ~120 KB gzipped
+- **Zero-dependency SEO** — Custom `SEO.tsx` component manages `<title>`, meta tags, OG tags, and canonical URL without external libraries
+- **CLS optimization** — Cumulative Layout Shift reduced from 0.422 to ~0 by identifying scrollbar-induced shifts and fixing navbar dimensions
+- **Accessibility score 93–100** — Skip-to-content link, `aria-current="page"` navigation, WCAG AA color contrast throughout
+- **Security headers** — CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy, COOP configured via Vercel
+- **No form backend, no analytics, no third-party scripts** — Privacy-first by default
 
 ## Project Structure
 
 ```
 src/
-├── main.tsx                # Entry point
-├── App.tsx                 # Routes configuration
-├── index.css               # Tailwind + theme tokens
+├── main.tsx                # Entry point (StrictMode + React 19)
+├── App.tsx                 # Lazy-loaded routes + Suspense
+├── index.css               # Tailwind + custom brand theme tokens
 ├── data/
 │   └── siteData.ts         # Single source of truth for all content
 ├── components/
-│   ├── Layout.tsx           # Navbar + Outlet + Footer shell
-│   ├── Navbar.tsx           # Fixed nav with mobile hamburger
-│   ├── Footer.tsx           # Social links + copyright
-│   ├── SEO.tsx              # Per-page meta tags (title, OG)
-│   └── Img.tsx              # Image with gradient placeholder + lazy loading
+│   ├── Layout.tsx           # Skip link + Navbar + ErrorBoundary + Footer
+│   ├── Navbar.tsx           # Fixed nav, scroll detection, mobile menu
+│   ├── Footer.tsx           # Social links, contact, copyright
+│   ├── SEO.tsx              # Per-page meta tags via DOM API
+│   ├── Img.tsx              # Placeholder-gradient images with lazy loading
+│   └── ErrorBoundary.tsx    # React class-based error boundary
 └── pages/
-    ├── Home.tsx             # Hero, stats, featured talk/episode, newsletter
-    ├── About.tsx            # Bio, stats, timeline, skills
-    ├── Talks.tsx            # Talk list with tag filter
-    ├── Podcast.tsx          # Podcast info, platform links, episodes
-    ├── Media.tsx            # Press coverage cards
-    ├── Support.tsx          # Programs, features, grant info
-    └── Partnerships.tsx    # Partner organization cards
+    ├── Home.tsx             # Hero, stats strip, featured talk/episode, newsletter
+    ├── About.tsx            # Bio, stats grid, timeline, skills
+    ├── Talks.tsx            # Talk list with tag-based filtering
+    ├── Podcast.tsx          # Podcast info, listening platforms, episode list
+    ├── Media.tsx            # Press coverage card grid
+    ├── Support.tsx          # Support programs, features, grant section
+    ├── Partnerships.tsx     # Partner organization cards
+    └── NotFound.tsx         # 404 page
 ```
 
 ## Architecture Decisions
 
-- **Single data source**: All text content lives in `src/data/siteData.ts`. Page components only render — they don't hardcode text.
-- **Zero-dependency SEO**: A lightweight `SEO.tsx` component uses `useEffect` to manage `<title>` and meta tags, avoiding heavy head-management libraries.
-- **Placeholder-first images**: The `Img.tsx` component renders CSS gradient placeholders that look intentional until real images are provided.
-- **Component-based routing**: React Router v7 with a shared `<Layout />` wrapper for Navbar + Footer.
+- **Single data source**: All text content in `src/data/siteData.ts`. Pages render data — they don't hardcode text. Adding a new talk or episode requires zero JSX changes.
+- **Route-level code splitting**: Non-home pages use `React.lazy()` so each page loads on demand. Home is eagerly loaded for instant first interaction.
+- **Zero-dependency SEO**: A lightweight component manages `<title>`, meta description, OG tags, and canonical URL via direct DOM API — no `react-helmet` or similar.
+- **Placeholder-first images**: The `Img` component renders CSS gradient placeholders with fixed `aspect-ratio` until real images are provided, preventing layout shift.
+- **Custom brand theme**: Tailwind v4 `@theme` directive defines a warm brown palette (`brand-50` through `brand-950`) consistent across all components.
+- **Component-based routing**: React Router v7 with a shared `<Layout />` shell (Navbar + ErrorBoundary + Footer) wrapping page routes.
+
+## Optimization Highlights
+
+| Area | Before | After | Technique |
+|------|--------|-------|-----------|
+| CLS | 0.422 | ~0 | `scrollbar-gutter: stable`, explicit navbar height |
+| Speed Index | 6.2 s | ~3–4 s | Reduced animation delays, opacity-only hero transitions |
+| Initial bundle | 399 KB | 378 KB (120 KB gzip) | Route-level code splitting |
+| Accessibility | 93 | 93–100 | `aria-current`, contrast fixes, skip link |
+| Best Practices | 77 | 100 | CSP + security headers |
 
 ## Getting Started
 
@@ -55,7 +94,7 @@ npm install
 # Start dev server
 npm run dev
 
-# TypeScript check
+# TypeScript check (strict mode)
 npx tsc --noEmit
 
 # Production build
@@ -67,14 +106,30 @@ npm run preview
 
 ## Deployment
 
-The project produces a static `dist/` folder. Deploy to any static host:
+Deployed via **Vercel** with automatic SPA fallback and custom security headers:
 
-- **Netlify**: Connect repo → set build command to `npm run build` → publish directory `dist`
-- **Vercel**: Import project → framework preset Vite → auto-detects settings
-- **GitHub Pages**: Run `npm run build` → push `dist/` to `gh-pages` branch
+- Repository import triggers auto-deploy
+- `vercel.json` configures SPA rewrites + security headers
+- Favicon, `robots.txt`, and `sitemap.xml` served from `public/`
 
-## Project Status
+## Project Evolution
 
-- **Phase 1 (MVP)** — Complete: 7 pages, routing, data layer, responsive
-- **Phase 2 (Polish)** — Complete: SEO, image placeholders, mobile UX, home page refinements
-- **Phase 3 (Launch)** — Planned: custom domain, form backend, analytics
+| Phase | Focus | Key Deliverables |
+|-------|-------|------------------|
+| 1 | MVP | 7 pages, routing, data layer, responsive layout |
+| 2 | Visual polish | SEO component, image placeholders, theme tokens, animations |
+| 3A | Deployment | 404 page, error boundary, accessibility, code splitting, robots/sitemap |
+| 3B | Launch | Vercel deployment, build verification |
+| 3C | Encoding fix | GBK/UTF-8 corruption repair |
+| 3D | Performance | CLS fix, Speed Index optimization, accessibility tuning |
+| 3E | Security | CSP + security headers, Lighthouse documentation |
+| 4 | Close-out | README, retrospective, portfolio docs, final checklist |
+
+## Future Directions
+
+- Form backend integration (serverless function or third-party)
+- CMS integration for talk/episode/press content
+- Real image assets replacing gradient placeholders
+- PWA support (service worker + manifest)
+- Blog section for long-form content
+- Performance budget in CI
